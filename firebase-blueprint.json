@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "Team": {
+      "title": "Team",
+      "description": "Represents a capstone team",
+      "type": "object",
+      "properties": {
+        "team_name": { "type": "string" },
+        "proponents": { "type": "array", "description": "List of student names" },
+        "program": { "type": "string" },
+        "class": { "type": "string" },
+        "email": { "type": "string" },
+        "contact_num": { "type": "string" },
+        "adviser": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["team_name", "proponents", "program", "class", "email", "contact_num", "adviser"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Represents a capstone project linked to a team",
+      "type": "object",
+      "properties": {
+        "teamId": { "type": "string" },
+        "project_title": { "type": "string" },
+        "description": { "type": "string" },
+        "objectives": { "type": "string" },
+        "status": { "type": "string", "enum": ["In Progress", "Completed", "Archived"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["teamId", "project_title", "status"]
+    },
+    "Defense": {
+      "title": "Defense",
+      "description": "Represents defense details for a team",
+      "type": "object",
+      "properties": {
+        "teamId": { "type": "string" },
+        "defense_type": { "type": "string" },
+        "defense_date": { "type": "string", "format": "date" },
+        "defense_time": { "type": "string" },
+        "panelists": { "type": "array" },
+        "recommendations": { "type": "string", "enum": ["accept with revisions", "re-defense", "not accepted"] },
+        "suggestions": { "type": "string" },
+        "status": { "type": "string", "enum": ["Scheduled", "Completed", "Cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["teamId", "defense_type", "defense_date", "defense_time", "panelists", "status"]
+    },
+    "Consultation": {
+      "title": "Consultation",
+      "description": "Represents a consultation record",
+      "type": "object",
+      "properties": {
+        "teamId": { "type": "string" },
+        "issues": { "type": "string" },
+        "recommendations": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["teamId", "issues", "recommendations"]
+    },
+    "AdminConfig": {
+      "title": "Admin Configuration",
+      "description": "Stores admin-specific settings",
+      "type": "object",
+      "properties": {
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/teams/{teamId}": { "schema": "Team", "description": "Teams collection" },
+    "/projects/{projectId}": { "schema": "Project", "description": "Projects collection" },
+    "/defenses/{defenseId}": { "schema": "Defense", "description": "Defenses collection" },
+    "/consultations/{consultationId}": { "schema": "Consultation", "description": "Consultations collection" },
+    "/adminConfig/{adminId}": { "schema": "AdminConfig", "description": "Admin configuration" }
+  }
+}
