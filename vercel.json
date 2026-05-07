@@ -6,7 +6,6 @@
   "env": {
     "NODE_ENV": "production"
   },
-  "envPrefix": "VITE_",
   "functions": {
     "api/**/*.ts": {
       "maxDuration": 30
